@@ -56,6 +56,9 @@ main {
   text-align: center;
 }
 
+
+
+
 /* =====
 Typography
 ===== */
@@ -66,6 +69,23 @@ Typography
   font-weight: 700;
   font-size: 2rem;
   line-height: 1.25;
+}
+
+.t_h2 {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.t_p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.625rem;
+  line-height: 1.16;
+
+  text-align: center;
 }
 
 /* =====
