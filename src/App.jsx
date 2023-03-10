@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Overlay from "./components/Overlay"
+import Questions from "./components/Questions"
 
 function App() {
   const [render, setRender] = useState(false)
@@ -9,9 +10,9 @@ function App() {
   }
   
   return (
-    <>
-      {render ? <h1>This one is rendered</h1> : <Overlay render={renderScreen}/> }
-    </>
+    <main>
+      {render ? <Questions /> : <Overlay render={renderScreen}/> }
+    </main>
   )
 }
 
