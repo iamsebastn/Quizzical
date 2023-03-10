@@ -1,12 +1,16 @@
 import { useState } from 'react'
+import Overlay from "./components/Overlay"
 
 function App() {
+  const [render, setRender] = useState(false)
+
+  function renderScreen() {
+    setRender(prevRender => !prevRender)
+  }
+  
   return (
     <>
-      <h1>Hello World!</h1>
-      <div className="overlay">
-      
-      </div>
+      {render ? <h1>This one is rendered</h1> : <Overlay render={renderScreen}/> }
     </>
   )
 }
