@@ -82,10 +82,8 @@ Typography
 .t_p {
   font-style: normal;
   font-weight: 500;
-  font-size: 0.625rem;
+  font-size: 1rem;
   line-height: 1.16;
-
-  text-align: center;
 }
 
 /* =====
