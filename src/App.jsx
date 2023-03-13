@@ -12,6 +12,7 @@ function App() {
   return (
     <main>
       {render ? <Questions /> : <Overlay render={renderScreen}/> }
+      <button className='reload_btn'>Check answers</button>
     </main>
   )
 }
