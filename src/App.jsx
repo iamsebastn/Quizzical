@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Overlay from "./components/Overlay"
+import Question from "./components/Question"
 import blobLeft from "./assets/blob-left.png"
 import blobRight from "./assets/blob-right.png"
 import { nanoid } from 'nanoid'
@@ -10,13 +11,13 @@ function App() {
 
   useEffect(() => {
     async function getQuestions() {
-      const res = await fetch("https://opentdb.com/api.php?amount=10&difficulty=hard&type=multiple")
+      const res = await fetch("https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple")
       const data = await res.json()
       setAllQuestions(data.results)
       // renders the question after pressing the overlay-button "allQuestions = Array"
     }
     getQuestions()
-  }, [render])
+  }, [])
 
   function hideOverlay() {
     setRender(false)
@@ -24,12 +25,12 @@ function App() {
 
   const questionHtml = allQuestions.map(question => {
     return (
-      <div key={nanoid()} className="question">
-          <h2 className="t_h2">{question.question}</h2>
-          <div className="answer__wrapper">
-              <div className="answer">{question.correct_answer}</div>
-          </div>
-      </div>
+      <Question 
+        key={nanoid()}
+        question={question.question}
+        correctAnswer={question.correct_answer}
+        wrongAnswer={question.incorrect_answers}
+      />
     )
   })
 
@@ -38,6 +39,7 @@ function App() {
       {render ? <Overlay handleClick={hideOverlay}/> : 
       <section className='question--wrapper'>
         {questionHtml}
+        <button>Check answers</button>
       </section>}
       <img className="absolute__img left" src={blobLeft}/>
       <img className="absolute__img right" src={blobRight}/>

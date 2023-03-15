@@ -1,24 +1,41 @@
 import { useState } from "react";
 
-export default function Question() {
-    const [answer, setAnswer] = useState(false)
-    const bgStyle = {backgroundColor: answer ? "#D6DBF5" : "#F5F7FB"}
-
-    function lockAnswer() {
-        setAnswer(!answer)
-    }
+export default function Question(props) {
+    // const bgStyle = {backgroundColor: answer ? "#D6DBF5" : "#F5F7FB"}
 
     return (
-        <section className="question--wrapper">
             <div className="question">
-                <h2 className="t_h2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nulla, sapiente iure vel fugit quisquam cum harum iusto cumque</h2>
+                <h2 className="t_h2">{props.question}</h2>
                 <div className="answer__wrapper">
-                    <div onClick={lockAnswer} className="answer" style={bgStyle}>Answer 1</div>
-                    <div onClick={lockAnswer} className="answer" style={bgStyle}>Answer 2</div>
-                    <div onClick={lockAnswer} className="answer" style={bgStyle}>Answer 3</div>
-                    <div onClick={lockAnswer} className="answer" style={bgStyle}>Answer 4</div>
+                    <div 
+                        onClick={console.log("I'm a button")} 
+                        className="answer" 
+                        // style={bgStyle}
+                        >
+                        {props.correctAnswer}
+                    </div>
+                    <div 
+                        onClick={console.log("I'm a button")} 
+                        className="answer" 
+                        // style={bgStyle}
+                        >
+                        {props.wrongAnswer[0]}
+                    </div>
+                    <div 
+                        onClick={console.log("I'm a button")} 
+                        className="answer" 
+                        // style={bgStyle}
+                        >
+                        {props.wrongAnswer[1]}
+                    </div>
+                    <div 
+                        onClick={console.log("I'm a button")} 
+                        className="answer" 
+                        // style={bgStyle}
+                        >
+                        {props.wrongAnswer[2]}
+                    </div>
                 </div>
             </div>
-        </section>
     )
 }
