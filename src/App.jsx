@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Overlay from "./components/Overlay"
 import blobLeft from "./assets/blob-left.png"
 import blobRight from "./assets/blob-right.png"
+import { nanoid } from 'nanoid'
 
 function App() {
   const [render, setRender] = useState(true)
@@ -23,7 +24,7 @@ function App() {
 
   const questionHtml = allQuestions.map(question => {
     return (
-      <div className="question">
+      <div key={nanoid()} className="question">
           <h2 className="t_h2">{question.question}</h2>
           <div className="answer__wrapper">
               <div className="answer">{question.correct_answer}</div>
