@@ -1,25 +1,11 @@
-import blobLeft from "../assets/blob-left.png"
-import blobRight from "../assets/blob-right.png"
-
-function Overlay(props) {
+export default function Overlay(props) {
     return (
-        <>
-            <div className="overlay">
-                <div className="intro">
-                    <h1 className="t_h1">Quizzical</h1>
-                    <p className="t_p">It's your time to shine! Challenge your friends and see who gets the best score!</p>
-                </div>
-                <button 
-                    className="start-btn"
-                    onClick= {props.render}
-                >
-                    Start Quiz
-                </button>
-                <img className="left" src={blobLeft}/>
-                <img className="right" src={blobRight}/>
+        <div className="overlay--wrapper">
+            <div className="overlay--content">
+                <h1 className="t_h1">Quizzical</h1>
+                <p className="t_p">One of the most addictive quizgames on this planet. Answer as many questions as you know to win nothing except the honor in your clique</p>
+                <button onClick={props.handleClick}>Start quiz</button>
             </div>
-        </>
+        </div>
     )
 }
-
-export default Overlay

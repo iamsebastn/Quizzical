@@ -1,18 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Overlay from "./components/Overlay"
-import Questions from "./components/Questions"
+import Question from "./components/Question"
+import blobLeft from "./assets/blob-left.png"
+import blobRight from "./assets/blob-right.png"
 
 function App() {
-  const [render, setRender] = useState(false)
+  const [render, setRender] = useState(true)
 
-  function renderScreen() {
-    setRender(prevRender => !prevRender)
+  function hideOverlay() {
+    setRender(false)
   }
-  
+
   return (
     <main>
-      {render ? <Questions /> : <Overlay render={renderScreen}/> }
-      <button className='reload_btn'>Check answers</button>
+      
+      {render ? <Overlay handleClick={hideOverlay}/> : <Question />}
+      <img className="absolute__img left" src={blobLeft}/>
+      <img className="absolute__img right" src={blobRight}/>
     </main>
   )
 }
