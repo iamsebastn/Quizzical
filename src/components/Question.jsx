@@ -3,12 +3,12 @@ export default function Question(props) {
         backgroundColor: props.isLogged ? "#D6DBF5" : "#F5F7FB"
     }
 
-    const answers = props.answers.map(element => {
+    const answers = props.answers.map((element) => {
         return (
             <div 
-                key={element.id} 
+                key={element.id}
                 className="answer" 
-                onClick={props.logAnswer}
+                onClick={() => props.logAnswer(element.id)}
                 style={bgStyle}
             >
                 {element.text}

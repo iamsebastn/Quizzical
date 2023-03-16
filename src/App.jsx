@@ -6,8 +6,8 @@ import blobRight from "./assets/blob-right.png"
 import { nanoid } from 'nanoid'
 
 // Steps: 
-//   * Give each answer an unique id
-//     -> get Id on click
+//   * Give each answer an unique id ✅
+//     -> get Id on click 
 //   * tick the right id
 //   * check if the logged answer is the right one
 
@@ -31,7 +31,7 @@ function App() {
             }
           }),
           correct: question.correct_answer,
-          isLogged: true,
+          isLogged: false,
         }
       })
       setQuestions(questionItems)
@@ -48,7 +48,7 @@ function App() {
     console.log(id)
   }
 
-  const questionHtml = questions.map(element => {
+  const questionHtml = questions.map((element) => {
     return (
       <Question 
         key={nanoid()}
@@ -57,7 +57,7 @@ function App() {
         correct={element.correct}
         isLogged={element.isLogged}
 
-        logAnswer={() => logAnswer(element.answers)}
+        logAnswer={logAnswer}
       />
     )
   })
