@@ -6,7 +6,7 @@ export default function Question(props) {
         backgroundColor: props.isLogged ? "D6DBF5" : "F5F7FB"
     }
 
-    const answers = props.answers.map(element => {
+    const answers = props.answers.possibilites.map(element => {
         return (
             <div 
                 id={nanoid()} 

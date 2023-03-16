@@ -5,6 +5,12 @@ import blobLeft from "./assets/blob-left.png"
 import blobRight from "./assets/blob-right.png"
 import { nanoid } from 'nanoid'
 
+// Steps: 
+//   * Give each answer an unique id
+//     -> get Id on click
+//   * tick the right id
+//   * check if the logged answer is the right one
+
 function App() {
   const [render, setRender] = useState(true)
   const [questions, setQuestions] = useState([])
@@ -18,12 +24,17 @@ function App() {
       const questionItems = results.map(question => {
         return {
           question: question.question,
-          answers: [...question.incorrect_answers, question.correct_answer],
+          // ⚠️ give each answer an unique id which can be logged out
+          answers: {
+            possibilites: [...question.incorrect_answers, question.correct_answer],
+            id: nanoid()
+          },
           correct: question.correct_answer,
           isLogged: false,
         }
       })
       setQuestions(questionItems)
+      console.log(questionItems.answers)
     }
     getQuestions()
   }, [])
@@ -33,15 +44,15 @@ function App() {
     setRender(false)
   }
 
-  function logAnswer(id) {
-    console.log(id)
+  function logAnswer(answer) {
+    console.log(answer)
   }
 
   const questionHtml = questions.map(element => {
     return (
       <Question 
         key={nanoid()}
-        logAnswer={() => logAnswer(element.answers.id)}
+        logAnswer={() => logAnswer(element.answers)}
         question={element.question}
         answers={element.answers}
         correct={element.correct}
