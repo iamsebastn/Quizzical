@@ -7,9 +7,9 @@ import { nanoid } from 'nanoid'
 
 // Steps: 
 //   * Give each answer an unique id ✅
-//     -> get Id on click 
+//     -> get Id on click ✅
 //   * tick the right id
-//   * check if the logged answer is the right one
+//   * check if the logged answer is the right ones
 
 function App() {
   const [render, setRender] = useState(true)
