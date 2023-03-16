@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { nanoid } from 'nanoid'
-
 export default function Question(props) {
     const bgStyle = {
-        backgroundColor: props.isLogged ? "D6DBF5" : "F5F7FB"
+        backgroundColor: props.isLogged ? "#D6DBF5" : "#F5F7FB"
     }
 
     const answers = props.answers.map(element => {

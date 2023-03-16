@@ -31,11 +31,10 @@ function App() {
             }
           }),
           correct: question.correct_answer,
-          isLogged: false,
+          isLogged: true,
         }
       })
       setQuestions(questionItems)
-      console.log(questions.answers)
     }
     getQuestions()
   }, [])
@@ -53,11 +52,12 @@ function App() {
     return (
       <Question 
         key={nanoid()}
-        logAnswer={() => logAnswer(element.answers)}
         question={element.question}
         answers={element.answers}
         correct={element.correct}
-        isLogged={true}
+        isLogged={element.isLogged}
+
+        logAnswer={() => logAnswer(element.answers)}
       />
     )
   })
