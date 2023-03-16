@@ -2,10 +2,20 @@ import { useState } from "react";
 import { nanoid } from 'nanoid'
 
 export default function Question(props) {
-    const answersArray = [...props.wrongAnswers, props.correctAnswer]
-    const answers = answersArray.map(element => {
+    const bgStyle = {
+        backgroundColor: props.isLogged ? "D6DBF5" : "F5F7FB"
+    }
+
+    const answers = props.answers.map(element => {
         return (
-            <div key={nanoid()} className="answer" onClick={props.handleClick}>{element}</div>
+            <div 
+                id={nanoid()} 
+                className="answer" 
+                onClick={props.logAnswer}
+                style={bgStyle}
+            >
+                {element}
+            </div>
         )
     })
 

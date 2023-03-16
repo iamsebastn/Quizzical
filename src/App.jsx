@@ -7,30 +7,45 @@ import { nanoid } from 'nanoid'
 
 function App() {
   const [render, setRender] = useState(true)
-  const [allQuestions, setAllQuestions] = useState([])
+  const [questions, setQuestions] = useState([])
 
   useEffect(() => {
     async function getQuestions() {
       const res = await fetch("https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple")
       const data = await res.json()
       const results = data.results
-      setAllQuestions(results)
-      // renders the question after pressing the overlay-button "allQuestions = Array"
+
+      const questionItems = results.map(question => {
+        return {
+          question: question.question,
+          answers: [...question.incorrect_answers, question.correct_answer],
+          correct: question.correct_answer,
+          isLogged: false,
+        }
+      })
+      setQuestions(questionItems)
     }
     getQuestions()
   }, [])
-
+  
   function hideOverlay() {
+    // renders the question after pressing the overlay-button "allQuestions = Array"
     setRender(false)
   }
 
-  const questionHtml = allQuestions.map(question => {
+  function logAnswer(id) {
+    console.log(id)
+  }
+
+  const questionHtml = questions.map(element => {
     return (
       <Question 
         key={nanoid()}
-        question={question.question}
-        wrongAnswers={question.incorrect_answers}
-        correctAnswer={question.correct_answer}
+        logAnswer={() => logAnswer(element.answers.id)}
+        question={element.question}
+        answers={element.answers}
+        correct={element.correct}
+        isLogged={true}
       />
     )
   })
