@@ -13,7 +13,10 @@ function App() {
     async function getQuestions() {
       const res = await fetch("https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple")
       const data = await res.json()
-      setAllQuestions(data.results)
+      const results = data.results
+
+      setAllQuestions(results)
+      console.log(results)
       // renders the question after pressing the overlay-button "allQuestions = Array"
     }
     getQuestions()
@@ -23,13 +26,17 @@ function App() {
     setRender(false)
   }
 
+  function tickAnswer() {
+    setAnswer(!answer)
+  }
+
   const questionHtml = allQuestions.map(question => {
     return (
       <Question 
         key={nanoid()}
         question={question.question}
+        wrongAnswers={question.incorrect_answers}
         correctAnswer={question.correct_answer}
-        wrongAnswer={question.incorrect_answers}
       />
     )
   })

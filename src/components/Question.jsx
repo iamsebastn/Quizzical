@@ -1,40 +1,20 @@
 import { useState } from "react";
+import { nanoid } from 'nanoid'
 
 export default function Question(props) {
-    // const bgStyle = {backgroundColor: answer ? "#D6DBF5" : "#F5F7FB"}
+    const bgStyle = {backgroundColor: props.ticked ? "#D6DBF5" : "#F5F7FB"}
+    const answersArray = [...props.wrongAnswers, props.correctAnswer]
+    const answers = answersArray.map(element => {
+        return (
+            <div key={nanoid()} className="answer" onClick={props.handleClick}>{element}</div>
+        )
+    })
 
     return (
             <div className="question">
                 <h2 className="t_h2">{props.question}</h2>
                 <div className="answer__wrapper">
-                    <div 
-                        onClick={console.log("I'm a button")} 
-                        className="answer" 
-                        // style={bgStyle}
-                        >
-                        {props.correctAnswer}
-                    </div>
-                    <div 
-                        onClick={console.log("I'm a button")} 
-                        className="answer" 
-                        // style={bgStyle}
-                        >
-                        {props.wrongAnswer[0]}
-                    </div>
-                    <div 
-                        onClick={console.log("I'm a button")} 
-                        className="answer" 
-                        // style={bgStyle}
-                        >
-                        {props.wrongAnswer[1]}
-                    </div>
-                    <div 
-                        onClick={console.log("I'm a button")} 
-                        className="answer" 
-                        // style={bgStyle}
-                        >
-                        {props.wrongAnswer[2]}
-                    </div>
+                {answers}
                 </div>
             </div>
     )

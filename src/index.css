@@ -76,7 +76,8 @@ main {
 .answer__wrapper {
   display: flex;
   margin-top: 0.75em;
-  
+  flex-wrap: wrap;
+  row-gap: 0.75em;
 }
 
 /* =====
@@ -158,8 +159,5 @@ button {
     padding: auto 0.75em;
   }
 
-  .answer__wrapper {
-    flex-wrap: wrap;
-    row-gap: 0.75em;
-  }
+
 }
