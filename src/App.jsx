@@ -24,17 +24,18 @@ function App() {
       const questionItems = results.map(question => {
         return {
           question: question.question,
-          // ⚠️ give each answer an unique id which can be logged out
-          answers: {
-            possibilites: [...question.incorrect_answers, question.correct_answer],
-            id: nanoid()
-          },
+          answers: [...question.incorrect_answers, question.correct_answer].map(obj => {
+            return {
+              text: obj,
+              id: nanoid()
+            }
+          }),
           correct: question.correct_answer,
           isLogged: false,
         }
       })
       setQuestions(questionItems)
-      console.log(questionItems.answers)
+      console.log(questions.answers)
     }
     getQuestions()
   }, [])
@@ -44,8 +45,8 @@ function App() {
     setRender(false)
   }
 
-  function logAnswer(answer) {
-    console.log(answer)
+  function logAnswer(id) {
+    console.log(id)
   }
 
   const questionHtml = questions.map(element => {
