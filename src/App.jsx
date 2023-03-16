@@ -14,9 +14,7 @@ function App() {
       const res = await fetch("https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple")
       const data = await res.json()
       const results = data.results
-
       setAllQuestions(results)
-      console.log(results)
       // renders the question after pressing the overlay-button "allQuestions = Array"
     }
     getQuestions()
@@ -24,10 +22,6 @@ function App() {
 
   function hideOverlay() {
     setRender(false)
-  }
-
-  function tickAnswer() {
-    setAnswer(!answer)
   }
 
   const questionHtml = allQuestions.map(question => {

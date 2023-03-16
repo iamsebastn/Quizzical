@@ -2,7 +2,6 @@ import { useState } from "react";
 import { nanoid } from 'nanoid'
 
 export default function Question(props) {
-    const bgStyle = {backgroundColor: props.ticked ? "#D6DBF5" : "#F5F7FB"}
     const answersArray = [...props.wrongAnswers, props.correctAnswer]
     const answers = answersArray.map(element => {
         return (
