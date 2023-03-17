@@ -27,11 +27,11 @@ function App() {
           answers: [...question.incorrect_answers, question.correct_answer].map(obj => {
             return {
               text: obj,
-              id: nanoid()
+              id: nanoid(),
+              isLogged: true,
             }
           }),
           correct: question.correct_answer,
-          isLogged: false,
         }
       })
       setQuestions(questionItems)
@@ -44,11 +44,15 @@ function App() {
     setRender(false)
   }
 
+  // Make this function work so that the button can be flipped
   function logAnswer(id) {
     console.log(id)
+    // setAnswers(prevAnswers => prevAnswers.map(answer => {
+    //   return answer.id === id ? {...answer, isLogged: !isLogged} : answer
+    // }))
   }
 
-  const questionHtml = questions.map((element) => {
+  const questionHtml = questions.map(element => {
     return (
       <Question 
         key={nanoid()}

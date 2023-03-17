@@ -1,6 +1,7 @@
 export default function Question(props) {
     const bgStyle = {
-        backgroundColor: props.isLogged ? "#D6DBF5" : "#F5F7FB"
+        // TODO: Change the state of the answers
+        backgroundColor: props.answers.isLogged ? "#D6DBF5" : "#F5F7FB"
     }
 
     const answers = props.answers.map((element) => {
