@@ -14,6 +14,7 @@ import { nanoid } from 'nanoid'
 function App() {
   const [render, setRender] = useState(true)
   const [questions, setQuestions] = useState([])
+  const [answers, setAnswers] = useState()
 
   useEffect(() => {
     async function getQuestions() {
@@ -28,7 +29,7 @@ function App() {
             return {
               text: obj,
               id: nanoid(),
-              isLogged: true,
+              isLogged: false,
             }
           }),
           correct: question.correct_answer,
@@ -37,6 +38,7 @@ function App() {
       setQuestions(questionItems)
     }
     getQuestions()
+    console.log(questions)
   }, [])
   
   function hideOverlay() {

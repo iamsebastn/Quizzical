@@ -1,7 +1,7 @@
 export default function Question(props) {
     const bgStyle = {
-        // TODO: Change the state of the answers
-        backgroundColor: props.answers.isLogged ? "#D6DBF5" : "#F5F7FB"
+        // TODO: Change the state of the answers Cause "Answers" is array I have to map over it to extract data
+        backgroundColor: props.answers[0].isLogged ? "#D6DBF5" : "#F5F7FB"
     }
 
     const answers = props.answers.map((element) => {
