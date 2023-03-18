@@ -14,7 +14,6 @@ import { nanoid } from 'nanoid'
 function App() {
   const [render, setRender] = useState(true)
   const [questions, setQuestions] = useState([])
-  const [answers, setAnswers] = useState()
 
   useEffect(() => {
     async function getQuestions() {
@@ -38,17 +37,21 @@ function App() {
       setQuestions(questionItems)
     }
     getQuestions()
-    console.log(questions)
+    
   }, [])
   
   function hideOverlay() {
     // renders the question after pressing the overlay-button "allQuestions = Array"
     setRender(false)
+    console.log(questions[0].answers)
   }
-
+  
   // Make this function work so that the button can be flipped
   function logAnswer(id) {
     console.log(id)
+    setQuestions(prevQuestion => prevQuestion[0].answers.map(answer => {
+      return answer.id === id ? {...answer, isLogged: !isLogged} : answer
+    }))
     // setAnswers(prevAnswers => prevAnswers.map(answer => {
     //   return answer.id === id ? {...answer, isLogged: !isLogged} : answer
     // }))
