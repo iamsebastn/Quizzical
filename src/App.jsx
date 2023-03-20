@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
+import he from "he"
 import Overlay from "./components/Overlay"
 import Question from "./components/Question"
+import Answer from "./components/Answer"
 import blobLeft from "./assets/blob-left.png"
 import blobRight from "./assets/blob-right.png"
 import { nanoid } from 'nanoid'
-import { event, get } from 'jquery'
 
 // Steps: 
 //   * Give each answer an unique id ✅
@@ -22,7 +23,7 @@ function App() {
       const data = await res.json()
       const results = data.results
 
-      const questionItems = results.map(question => {
+      const questionItems = results.map((question, index) => {
         return {
           question: question.question,
           answers: [...question.incorrect_answers, question.correct_answer].map(obj => {
@@ -33,6 +34,7 @@ function App() {
             }
           }),
           correct: question.correct_answer,
+          id: index
         }
       })
       setQuestionsArray(questionItems)
@@ -42,28 +44,26 @@ function App() {
   
   function hideOverlay() {
     setRender(false)
-    console.log(questions[0].answers)
   }
 
-  function logAnswer(id) {
-    console.log(id)
-    // work in it till only one answer per question can be ticked. 
-    setQuestionsArray(prevQuestions => prevQuestions.map((question, index) => {
-      return {
-          question: question.question,
-          answers: question.answers.map(item => {
+  function logAnswer(id, index) {
+    // Working on here
+    setQuestionsArray(prevQuestions => prevQuestions.map(question => {
+      return id.target.id === question.id ? {
+          ...question,
+          answers: questionsArray[index].answers.map(item => {
             if(item.id === id) {
               return {
                 ...item,
                 isLogged: !item.isLogged
               }
             } else {
-              return item
+              return {...item,
+              isLogged: false
+              }
             }
           }),
-          correct: question.correct,
-          id: index
-      }
+      } : question
     }))
   }
 
@@ -75,14 +75,14 @@ function App() {
         question={element.question}
         answers={element.answers.map(item => {
           return (
-            <div
+            <Answer 
               key={item.id}
-              className='answer'
+              id={item.id}
+              index={element.index}
               isLogged={item.isLogged}
-              style={{backgroundColor: item.isLogged ? "#D6DBF5" : "#F5F7FB"}}
-            >
-              {item.text}
-            </div>
+              handleClick={logAnswer}
+              text= {he.decode(item.text)}
+            />
           )
         })}
         correct={element.correct}
