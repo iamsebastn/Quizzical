@@ -42,12 +42,13 @@ function App() {
   
   function hideOverlay() {
     setRender(false)
+    console.log(questions[0].answers)
   }
 
   function logAnswer(id) {
     console.log(id)
     // work in it till only one answer per question can be ticked. 
-    setQuestionsArray(prevQuestions => prevQuestions.map(question => {
+    setQuestionsArray(prevQuestions => prevQuestions.map((question, index) => {
       return {
           question: question.question,
           answers: question.answers.map(item => {
@@ -60,7 +61,8 @@ function App() {
               return item
             }
           }),
-          correct: question.correct
+          correct: question.correct,
+          id: index
       }
     }))
   }
@@ -78,7 +80,8 @@ function App() {
               className='answer'
               isLogged={item.isLogged}
               style={{backgroundColor: item.isLogged ? "#D6DBF5" : "#F5F7FB"}}
-            >{item.text}
+            >
+              {item.text}
             </div>
           )
         })}
