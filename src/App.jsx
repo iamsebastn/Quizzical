@@ -4,6 +4,7 @@ import Question from "./components/Question"
 import blobLeft from "./assets/blob-left.png"
 import blobRight from "./assets/blob-right.png"
 import { nanoid } from 'nanoid'
+import { event, get } from 'jquery'
 
 // Steps: 
 //   * Give each answer an unique id ✅
@@ -13,7 +14,7 @@ import { nanoid } from 'nanoid'
 
 function App() {
   const [render, setRender] = useState(true)
-  const [questions, setQuestions] = useState([])
+  const [questionsArray, setQuestionsArray] = useState([])
 
   useEffect(() => {
     async function getQuestions() {
@@ -34,31 +35,54 @@ function App() {
           correct: question.correct_answer,
         }
       })
-      setQuestions(questionItems)
+      setQuestionsArray(questionItems)
     }
     getQuestions()
   },[])
   
   function hideOverlay() {
     setRender(false)
-    // Use the place here for the Console.Log
   }
 
   function logAnswer(id) {
     console.log(id)
+    // work in it till only one answer per question can be ticked. 
+    setQuestionsArray(prevQuestions => prevQuestions.map(question => {
+      return {
+          question: question.question,
+          answers: question.answers.map(item => {
+            if(item.id === id) {
+              return {
+                ...item,
+                isLogged: !item.isLogged
+              }
+            } else {
+              return item
+            }
+          }),
+          correct: question.correct
+      }
+    }))
   }
 
-  const questionHtml = questions.map(element => {
+  const questionHtml = questionsArray.map(element => {
     return (
       <Question 
         key={nanoid()}
-        id={nanoid()}
+        id={element.id}
         question={element.question}
-        answers={element.answers}
+        answers={element.answers.map(item => {
+          return (
+            <div
+              key={item.id}
+              className='answer'
+              isLogged={item.isLogged}
+              style={{backgroundColor: item.isLogged ? "#D6DBF5" : "#F5F7FB"}}
+            >{item.text}
+            </div>
+          )
+        })}
         correct={element.correct}
-        isLogged={element.isLogged}
-
-        logAnswer={logAnswer}
       />
     )
   })
