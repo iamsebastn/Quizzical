@@ -37,30 +37,22 @@ function App() {
       setQuestions(questionItems)
     }
     getQuestions()
-    
-  }, [])
+  },[])
   
   function hideOverlay() {
-    // renders the question after pressing the overlay-button "allQuestions = Array"
     setRender(false)
-    console.log(questions[0].answers)
+    // Use the place here for the Console.Log
   }
-  
-  // Make this function work so that the button can be flipped
+
   function logAnswer(id) {
     console.log(id)
-    setQuestions(prevQuestion => prevQuestion[0].answers.map(answer => {
-      return answer.id === id ? {...answer, isLogged: !isLogged} : answer
-    }))
-    // setAnswers(prevAnswers => prevAnswers.map(answer => {
-    //   return answer.id === id ? {...answer, isLogged: !isLogged} : answer
-    // }))
   }
 
   const questionHtml = questions.map(element => {
     return (
       <Question 
         key={nanoid()}
+        id={nanoid()}
         question={element.question}
         answers={element.answers}
         correct={element.correct}
