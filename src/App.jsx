@@ -34,8 +34,8 @@ function App() {
               text: obj,
               id: nanoid(),
               isLogged: false,
-              isCorrect: false,
-              isWrong: false
+              isCorrectAnswer: false,
+              isWrongAnswer: false,
             }
           }),
           correct: question.correct_answer,
@@ -80,10 +80,12 @@ function App() {
       for(let question of questionsArray) {
         for(let answer of question.answers) {
           if(answer.text === question.correct && answer.isLogged) {
-            answer.isCorrect = true
+            answer.isCorrectAnswer = true
             setCount(prevCount => prevCount + 1)
-          } else if(answer.text != question.correct && answer.isLogged) {
-            answer.isWrong = true
+          } else if(answer.text != question.correct) {
+            answer.isWrongAnswer = true
+          } else {
+            answer.isLogged = true
           }
         }
       }
@@ -107,8 +109,8 @@ function App() {
               id={item.id}
               index={element.id}
               isLogged={item.isLogged}
-              isCorrect={item.isCorrect}
-              isWrong={item.isWrong}
+              isCorrect={item.isCorrectAnswer}
+              isWrong={item.isWrongAnswer}
               handleClick={logAnswer}
               text= {he.decode(item.text)}
             />
