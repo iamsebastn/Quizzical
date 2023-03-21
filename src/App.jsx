@@ -52,7 +52,7 @@ function App() {
       return id.target.id === question.id ? {
           ...question,
           answers: questionsArray[index].answers.map(item => {
-            if(item.id === id) {
+            if(item.id === id.target.id) {
               return {
                 ...item,
                 isLogged: !item.isLogged
