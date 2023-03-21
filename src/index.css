@@ -104,6 +104,11 @@ Typography
   color: var(--color-txt);
 }
 
+.summary {
+  position: relative;
+  z-index: 2;
+}
+
 /* =====
 Img's
 ===== */

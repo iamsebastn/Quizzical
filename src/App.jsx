@@ -124,7 +124,7 @@ function App() {
       {render ? <Overlay handleClick={hideOverlay}/> : 
       <section className='question--wrapper'>
         {questionHtml}
-        {endGame && <h2>You scored {count}/10 answers right!</h2>}
+        {endGame && <h2 className='summary'>You scored {count}/10 answers right!</h2>}
         <button onClick={checkAnswers}>{endGame ? "Play again" : "Check answers"}</button>
       </section>}
       <img className="absolute__img left" src={blobLeft}/>
