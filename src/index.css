@@ -147,7 +147,9 @@ button {
   cursor: pointer;
 }
 
-.answer {
+.answer,
+.answer--correct,
+.answer--wrong {
   padding: 0.5em 1.5em;
   margin-right: 0.75em;
   border: 1px solid var(--color-btn);
@@ -155,11 +157,11 @@ button {
   cursor: pointer;
 }
 
-.correct {
+.answer--correct {
   background: #94D7A2;
 }
 
-.wrong {
+.answer--wrong {
   background: #E84B4B;
 }
 

@@ -14,6 +14,7 @@ function App() {
   const [render, setRender] = useState(true)
   const [questionsArray, setQuestionsArray] = useState([])
   const [endGame, setEndGame] = useState(false)
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
     async function getQuestions() {
@@ -33,6 +34,8 @@ function App() {
               text: obj,
               id: nanoid(),
               isLogged: false,
+              isCorrect: false,
+              isWrong: false
             }
           }),
           correct: question.correct_answer,
@@ -46,7 +49,6 @@ function App() {
   
   function hideOverlay() {
     setRender(false)
-    console.log(questionsArray)
   }
 
   function logAnswer(id, index) {
@@ -72,13 +74,23 @@ function App() {
   }
 
   function checkAnswers() {
-    setEndGame(true)
-    for(let question of questionsArray) {
-      for(let answers of question.answers) {
-        if(answers.answer === question.correct && question.isLogged) {
-
+    // Logic is right, but still a way need to be found to change the background color accordingly
+    if(!endGame) {
+      setEndGame(true)
+      for(let question of questionsArray) {
+        for(let answer of question.answers) {
+          if(answer.text === question.correct && answer.isLogged) {
+            answer.isCorrect = true
+            setCount(prevCount => prevCount + 1)
+          } else if(answer.text != question.correct && answer.isLogged) {
+            answer.isWrong = true
+          }
         }
       }
+    } else {
+      setEndGame(false)
+      setRender(true)
+      setQuestionsArray([])
     }
   }
 
@@ -95,6 +107,8 @@ function App() {
               id={item.id}
               index={element.id}
               isLogged={item.isLogged}
+              isCorrect={item.isCorrect}
+              isWrong={item.isWrong}
               handleClick={logAnswer}
               text= {he.decode(item.text)}
             />
@@ -110,6 +124,7 @@ function App() {
       {render ? <Overlay handleClick={hideOverlay}/> : 
       <section className='question--wrapper'>
         {questionHtml}
+        {endGame && <h2>You scored {count}/10 answers right!</h2>}
         <button onClick={checkAnswers}>{endGame ? "Play again" : "Check answers"}</button>
       </section>}
       <img className="absolute__img left" src={blobLeft}/>
