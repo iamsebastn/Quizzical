@@ -9,7 +9,7 @@ export default function Answer(props) {
 
     return (
         <div 
-            className="answer--correct"
+            className="answer"
             onClick={() => props.handleClick(props.id, props.index)}
             style={bgStyle}
         >
