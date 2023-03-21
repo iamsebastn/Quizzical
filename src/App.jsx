@@ -16,6 +16,7 @@ import { nanoid } from 'nanoid'
 function App() {
   const [render, setRender] = useState(true)
   const [questionsArray, setQuestionsArray] = useState([])
+  const [endGame, setEndGame] = useState(false)
 
   useEffect(() => {
     async function getQuestions() {
@@ -23,10 +24,14 @@ function App() {
       const data = await res.json()
       const results = data.results
 
+      let randomIndex = Math.floor(Math.random() * 4)
+      
       const questionItems = results.map((question, index) => {
+        question.incorrect_answers.splice(randomIndex, 0, question.correct_answer)
+
         return {
           question: question.question,
-          answers: [...question.incorrect_answers, question.correct_answer].map(obj => {
+          answers: question.incorrect_answers.map(obj => {
             return {
               text: obj,
               id: nanoid(),
@@ -40,26 +45,28 @@ function App() {
       setQuestionsArray(questionItems)
     }
     getQuestions()
-  },[])
+  },[render])
   
   function hideOverlay() {
     setRender(false)
+    console.log(questionsArray)
   }
 
   function logAnswer(id, index) {
     // Working on here
     setQuestionsArray(prevQuestions => prevQuestions.map(question => {
-      return id.target.id === question.id ? {
+      return index === question.id ? {
           ...question,
           answers: questionsArray[index].answers.map(item => {
-            if(item.id === id.target.id) {
+            if(id === item.id) {
               return {
                 ...item,
-                isLogged: !item.isLogged
+                isLogged: true
               }
             } else {
-              return {...item,
-              isLogged: false
+              return {
+                ...item,
+                isLogged: false
               }
             }
           }),
@@ -67,18 +74,29 @@ function App() {
     }))
   }
 
+  function checkAnswers() {
+    setEndGame(true)
+    for(let question of questionsArray) {
+      for(let answers of question.answers) {
+        if(answers.answer === question.correct && question.isLogged) {
+          
+        }
+      }
+    }
+  }
+
   const questionHtml = questionsArray.map(element => {
     return (
       <Question 
         key={nanoid()}
-        id={element.id}
+        index={element.id}
         question={element.question}
         answers={element.answers.map(item => {
           return (
             <Answer 
               key={item.id}
               id={item.id}
-              index={element.index}
+              index={element.id}
               isLogged={item.isLogged}
               handleClick={logAnswer}
               text= {he.decode(item.text)}
@@ -95,7 +113,7 @@ function App() {
       {render ? <Overlay handleClick={hideOverlay}/> : 
       <section className='question--wrapper'>
         {questionHtml}
-        <button>Check answers</button>
+        <button onClick={checkAnswers}>{endGame ? "Play again" : "Check answers"}</button>
       </section>}
       <img className="absolute__img left" src={blobLeft}/>
       <img className="absolute__img right" src={blobRight}/>
