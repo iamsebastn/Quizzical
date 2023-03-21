@@ -8,9 +8,6 @@ import blobRight from "./assets/blob-right.png"
 import { nanoid } from 'nanoid'
 
 // Steps: 
-//   * Give each answer an unique id ✅
-//     -> get Id on click ✅
-//   * tick the right id
 //   * check if the logged answer is the right ones
 
 function App() {
@@ -79,7 +76,7 @@ function App() {
     for(let question of questionsArray) {
       for(let answers of question.answers) {
         if(answers.answer === question.correct && question.isLogged) {
-          
+
         }
       }
     }
