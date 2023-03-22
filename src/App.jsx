@@ -93,6 +93,7 @@ function App() {
       setEndGame(false)
       setRender(true)
       setQuestionsArray([])
+      setCount(0)
     }
   }
 
