@@ -7,9 +7,6 @@ import blobLeft from "./assets/blob-left.png"
 import blobRight from "./assets/blob-right.png"
 import { nanoid } from 'nanoid'
 
-// Steps: 
-//   * check if the logged answer is the right ones
-
 function App() {
   const [render, setRender] = useState(true)
   const [questionsArray, setQuestionsArray] = useState([])
@@ -137,10 +134,3 @@ function App() {
 }
 
 export default App
-
-// category: "Entertainment: Video Games"
-// correct_answer: "Chronal Accelerator"
-// difficulty: "hard"
-// incorrect_answers: (3) ['B.L.I.N.K', 'Spacial Displacement Manipulator', 'TMD (Time Manipulation Device)']
-// question: "What device allows Tracer to manipulate her own time in the game &quot;Overwatch&quot;?"
-// type: "multiple"
