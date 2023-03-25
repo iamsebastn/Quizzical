@@ -42,7 +42,7 @@ function App() {
       setQuestionsArray(questionItems)
     }
     getQuestions()
-  },[])
+  },[render])
   
   function hideOverlay() {
     setRender(false)
